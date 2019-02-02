@@ -30,7 +30,20 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    let result;
+    if (num % 3 == 0 && num % 5 == 0) {
+        result = "FizzBuzz";
+    }
+    else if (num % 3 == 0) {
+        result = "Fizz";
+    }
+    else if (num % 5 == 0) {
+        result = "Buzz";
+    }
+    else {
+        result = num;
+    }
+    return result;
 }
 
 
@@ -46,7 +59,12 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    let result = 1;
+    if (n == 0 || n == 1) result = 1;
+    for (let i = 2; i <= n; i++) {
+        result = result * i;
+    }
+    return result;
 }
 
 
@@ -63,7 +81,11 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let sum = 0;
+    for (let i = n1; i <= n2; i++) {
+        sum = sum + i;
+    }
+    return sum;
 }
 
 
@@ -81,8 +103,12 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+    let isValid = false;
+    if (a + b > c && b + c > a && a + c > b) {
+        isValid = true;
+    }
+    return isValid;
 }
 
 
@@ -150,7 +176,12 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    let distanceFromCenter = Math.sqrt(Math.pow(circle.center.x - point.x, 2) + Math.pow(circle.center.y - point.y, 2));
+    let result = false;
+    if (circle.radius > distanceFromCenter) {
+        result = true;
+    }
+    return result;
 }
 
 
@@ -166,7 +197,26 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    let charMap = new Map();
+    for (let i = 0; i < str.length; i++) {
+        let c = str.charAt(i);
+        if (charMap.has(c)) {
+            let val = charMap.get(c);
+            charMap.delete(c);
+            charMap.set(c, val + 1);
+        }
+        else {
+            charMap.set(c, 1);
+        }
+    }
+    let found = null;
+    for (var [key, value] of charMap) {
+        if (charMap.get(key) === 1) {
+            found = key;
+            break;
+        }
+    }
+    return found;
 }
 
 
@@ -192,7 +242,26 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    let result;
+    if (isStartIncluded) {
+        result = "[";
+    }
+    else {
+        result = "(";
+    }
+    if (a > b) {
+        result = result + b + ", " + a;
+    }
+    else {
+        result = result + a + ", " + b;
+    }
+    if (isEndIncluded) {
+        result = result + "]";
+    }
+    else {
+        result = result + ")";
+    }
+    return result;
 }
 
 
@@ -209,7 +278,15 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    let words = str.split(' ');
+    for (let i = 0; i < words.length; i++) {
+        words[i] = words[i].split("");
+        words[i] = words[i].reverse();
+        words[i] = words[i].join("");
+    }
+    words = words.reverse();
+    words = words.join(" ");
+    return words;
 }
 
 
@@ -226,7 +303,12 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    let reversedNumber = 0;
+    while (num > 0) {
+        reversedNumber = reversedNumber * 10 + num % 10;
+        num = Math.floor(num / 10);
+    }
+    return reversedNumber;
 }
 
 
@@ -251,7 +333,32 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    let ccnArray = ccn.toString().split("").reverse();
+    ccnArray.map(function (val, index) {
+        //console.log("index ",index);
+        ccnArray[index] = parseInt(val);
+        if (index % 2 == 1) {
+            ccnArray[index] = sumOfTwoDigits(2 * ccnArray[index]);
+        }
+    });
+    let sum = 0;
+    //console.log(ccnArray);
+    ccnArray.map(function (val) {
+        sum = sum + val;
+    });
+    return sum % 10 === 0;
+}
+function sumOfTwoDigits(num) {
+
+    let result;
+    if (num % 10 === num) {
+        result = num;
+    }
+    else {
+        result = num % 10 + Math.floor(num / 10);
+    }
+    // console.log(num+" to "+result);
+    return result;
 }
 
 
@@ -296,9 +403,38 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    let stackArray = [], result = false;
+    for (let i = 0; i < str.length; i++) {
+        let top = stackArray[stackArray.length - 1];
+        if (opposite(top, str[i])) {
+            stackArray.pop();
+        }
+        else {
+            stackArray.push(str[i]);
+        }
+    }
+    if (stackArray.length === 0) {
+        result = true;
+    }
+    return result;
 }
 
+function opposite(symbol1, symbol2) {
+    let result = false;
+    if (symbol1 === '<' && symbol2 === '>') {
+        result = true;
+    }
+    else if (symbol1 === '[' && symbol2 === ']') {
+        result = true;
+    }
+    else if (symbol1 === '{' && symbol2 === '}') {
+        result = true;
+    }
+    else if (symbol1 === '(' && symbol2 === ')') {
+        result = true;
+    }
+    return result;
+}
 
 /**
  * Returns the human readable string of time period specified by the start and end time.
@@ -332,7 +468,7 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+
 }
 
 
@@ -356,7 +492,12 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    let result = "";
+    while (num > 0) {
+        result = result + num % n;
+        num = Math.floor(num / n);
+    }
+    return result.split("").reverse().join("");
 }
 
 
@@ -373,8 +514,28 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    let commonPath = pathes[0].split("/");
+    for (let i = 1; i < pathes.length; i++) {
+        commonPath = commonPathBetween(commonPath, pathes[i].split("/"));
+    }
+    return commonPath.join("/");
 }
+function commonPathBetween(commonpath, path2) {
+    let newCommonPath = [];
+    let pathWithSmallerLength = commonpath.length > path2.length ? path2 : commonpath;
+    for (let j = 0; j < pathWithSmallerLength.length; j++) {
+        if (commonpath[j] === path2[j]) {
+          //console.log(commonpath[j]);
+            newCommonPath.push(commonpath[j]);
+        }
+        else {
+         // console.log(commonpath[j]);
+            break;
+        }
+    }
+    return newCommonPath;
+}
+
 
 
 /**
@@ -443,15 +604,15 @@ module.exports = {
     doRectanglesOverlap: doRectanglesOverlap,
     isInsideCircle: isInsideCircle,
     findFirstSingleChar: findFirstSingleChar,
-    getIntervalString : getIntervalString,
+    getIntervalString: getIntervalString,
     reverseString: reverseString,
     reverseInteger: reverseInteger,
     isCreditCardNumber: isCreditCardNumber,
     getDigitalRoot: getDigitalRoot,
     isBracketsBalanced: isBracketsBalanced,
-    timespanToHumanString : timespanToHumanString,
+    timespanToHumanString: timespanToHumanString,
     toNaryString: toNaryString,
     getCommonDirectoryPath: getCommonDirectoryPath,
     getMatrixProduct: getMatrixProduct,
-    evaluateTicTacToePosition : evaluateTicTacToePosition
+    evaluateTicTacToePosition: evaluateTicTacToePosition
 };

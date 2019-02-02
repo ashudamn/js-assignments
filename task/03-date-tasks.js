@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return new Date(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   return new Date(value);
 }
 
 
@@ -56,7 +56,21 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   var year = date.getFullYear();
+   var leapYearstatus=false;
+   if (year % 4 == 0) {
+      if (year % 400 == 0) {
+         leapYearstatus=true;
+      }
+      else if (year % 100 == 0){
+         leapYearstatus=false;
+      }
+      else{
+         leapYearstatus=true;
+      }
+      
+   }
+   return leapYearstatus;
 }
 
 
@@ -76,10 +90,23 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   var milliseconds=endDate-startDate;
+   var HH=calculateHours(milliseconds);
+   milliseconds=milliseconds%(HH*60*60*1000);
+   var MM=calculateMinutes(milliseconds);
+   milliseconds=milliseconds%(MM*60*1000);
+   var SS=calculateSeconds(milliseconds);
+
 }
-
-
+function calculateHours(milliseconds){
+return milliseconds/60*60*1000;
+}
+function calculateMinutes(milliseconds){
+   return milliseconds/60*1000;
+}
+function calculateSeconds(milliseconds){
+   return milliseconds/1000;
+}
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
  * If you have problem with solution please read: https://en.wikipedia.org/wiki/Clock_angle_problem
@@ -94,14 +121,14 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+  
 }
 
 
 module.exports = {
-    parseDataFromRfc2822: parseDataFromRfc2822,
-    parseDataFromIso8601: parseDataFromIso8601,
-    isLeapYear: isLeapYear,
-    timeSpanToString: timeSpanToString,
-    angleBetweenClockHands: angleBetweenClockHands
+   parseDataFromRfc2822: parseDataFromRfc2822,
+   parseDataFromIso8601: parseDataFromIso8601,
+   isLeapYear: isLeapYear,
+   timeSpanToString: timeSpanToString,
+   angleBetweenClockHands: angleBetweenClockHands
 };
