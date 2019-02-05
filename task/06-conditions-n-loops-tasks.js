@@ -209,9 +209,9 @@ function findFirstSingleChar(str) {
         }
     }
     let found = null;
-    for (var [key, value] of charMap) {
-        if (charMap.get(key) === 1) {
-            found = key;
+    for (var pair of charMap) {
+        if (charMap.get(pair[0]) === 1) {
+            found = pair[0];
             break;
         }
     }
