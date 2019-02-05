@@ -8,7 +8,6 @@
  *                                                                                                *
  **************************************************************************************************/
 
-
 /**
  * Returns the 'Fizz','Buzz' or an original number using the following rules:
  * 1) return original number
@@ -46,7 +45,6 @@ function getFizzBuzz(num) {
     return result;
 }
 
-
 /**
  * Returns the factorial of the specified integer n.
  *
@@ -67,7 +65,6 @@ function getFactorial(n) {
     return result;
 }
 
-
 /**
  * Returns the sum of integer numbers between n1 and n2 (inclusive).
  *
@@ -87,7 +84,6 @@ function getSumBetweenNumbers(n1, n2) {
     }
     return sum;
 }
-
 
 /**
  * Returns true, if a triangle can be built with the specified sides a,b,c and false in any other ways.
@@ -110,7 +106,6 @@ function isTriangle(a, b, c) {
     }
     return isValid;
 }
-
 
 /**
  * Returns true, if two specified axis-aligned rectangles overlap, otherwise false.
@@ -145,9 +140,14 @@ function isTriangle(a, b, c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
-}
+    let downRect1 = rect1.top + rect1.height;
+    let rightRect1 = rect1.left + rect1.width;
 
+    if (downRect1 >= rect2.top && rightRect1 >= rect2.left) {
+        return true;
+    }
+    else return false;
+}
 
 /**
  * Returns true, if point lies inside the circle, otherwise false.
@@ -184,7 +184,6 @@ function isInsideCircle(circle, point) {
     return result;
 }
 
-
 /**
  * Returns the first non repeated char in the specified strings otherwise returns null.
  *
@@ -218,7 +217,6 @@ function findFirstSingleChar(str) {
     }
     return found;
 }
-
 
 /**
  * Returns the string representation of math interval, specified by two points and include / exclude flags.
@@ -264,7 +262,6 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
     return result;
 }
 
-
 /**
  * Reverse the specified string (put all chars in reverse order)
  *
@@ -289,7 +286,6 @@ function reverseString(str) {
     return words;
 }
 
-
 /**
  * Reverse the specified integer number (put all digits in reverse order)
  *
@@ -310,7 +306,6 @@ function reverseInteger(num) {
     }
     return reversedNumber;
 }
-
 
 /**
  * Validates the CCN (credit card number) and return true if CCN is valid
@@ -361,7 +356,6 @@ function sumOfTwoDigits(num) {
     return result;
 }
 
-
 /**
  * Returns the digital root of integer:
  *   step1 : find sum of all digits
@@ -377,10 +371,20 @@ function sumOfTwoDigits(num) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    if (num > 9) {
+        num = calculateSumOfDigits(num);
+        return getDigitalRoot(num);
+    }
+    return num;
 }
-
-
+function calculateSumOfDigits(n) {
+    let sum = 0;
+    while (n > 0) {
+        sum = sum + n % 10;
+        n = Math.floor(n / 10);
+    }
+    return sum;
+}
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
  * Balanced means that is, whether it consists entirely of pairs of opening/closing brackets
@@ -468,9 +472,8 @@ function opposite(symbol1, symbol2) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-
+    throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n<=10) representation of specified number.
@@ -500,7 +503,6 @@ function toNaryString(num, n) {
     return result.split("").reverse().join("");
 }
 
-
 /**
  * Returns the commom directory path for specified array of full filenames.
  *
@@ -514,29 +516,45 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    let commonPath = pathes[0].split("/");
-    for (let i = 1; i < pathes.length; i++) {
-        commonPath = commonPathBetween(commonPath, pathes[i].split("/"));
+    let result = "";
+
+    function wordComplainer(a, b) {
+        if (a == b && a != "") {
+            result = result + "/" + a;
+        }
+        else return false
     }
-    return commonPath.join("/");
+
+    for (let i = pathes.length; i > 1; i--) {
+        let a = pathes[i - 2].split('/');
+        let b = pathes[i - 1].split('/');
+        if (a[0] != b[0]) {
+            return ""
+        }
+
+        for (let i = 0; a.length > i; i++) {
+            wordComplainer(a[i], b[i]);
+
+        }
+    }
+
+    return result + "/";
 }
 function commonPathBetween(commonpath, path2) {
     let newCommonPath = [];
     let pathWithSmallerLength = commonpath.length > path2.length ? path2 : commonpath;
     for (let j = 0; j < pathWithSmallerLength.length; j++) {
         if (commonpath[j] === path2[j]) {
-          //console.log(commonpath[j]);
+            //console.log(commonpath[j]);
             newCommonPath.push(commonpath[j]);
         }
         else {
-         // console.log(commonpath[j]);
+            // console.log(commonpath[j]);
             break;
         }
     }
     return newCommonPath;
 }
-
-
 
 /**
  * Returns the product of two specified matrixes.
@@ -556,10 +574,21 @@ function commonPathBetween(commonpath, path2) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+function getMatrixProduct(a, b) {
+    var aNumRows = a.length, aNumCols = a[0].length,
+        bNumRows = b.length, bNumCols = b[0].length,
+        m = new Array(aNumRows);  // initialize array of rows
+    for (var r = 0; r < aNumRows; ++r) {
+        m[r] = new Array(bNumCols); // initialize the current row
+        for (var c = 0; c < bNumCols; ++c) {
+            m[r][c] = 0;             // initialize the current cell
+            for (var i = 0; i < aNumCols; ++i) {
+                m[r][c] += a[r][i] * b[i][c];
+            }
+        }
+    }
+    return m;
 }
-
 
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
@@ -594,7 +623,6 @@ function getMatrixProduct(m1, m2) {
 function evaluateTicTacToePosition(position) {
     throw new Error('Not implemented');
 }
-
 
 module.exports = {
     getFizzBuzz: getFizzBuzz,

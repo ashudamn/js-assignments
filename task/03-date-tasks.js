@@ -92,20 +92,48 @@ function isLeapYear(date) {
 function timeSpanToString(startDate, endDate) {
    var milliseconds=endDate-startDate;
    var HH=calculateHours(milliseconds);
+   var H,M,S,mm;
+   if(HH%10==HH){
+      H="0"+HH;
+   }
+   else{
+      H=HH;
+   }
+   console.log(HH);
    milliseconds=milliseconds%(HH*60*60*1000);
    var MM=calculateMinutes(milliseconds);
-   milliseconds=milliseconds%(MM*60*1000);
-   var SS=calculateSeconds(milliseconds);
-
+   if(MM%10==MM){
+      M="0"+MM;
+   }
+   else{
+      M=MM;
+   }
+   console.log(MM);
+   if(MM!=0){
+      milliseconds=milliseconds%(MM*60*1000);
+      var SS=calculateSeconds(milliseconds);
+      console.log("SS",SS);
+      if(SS%10==SS){
+         S="0"+SS;
+      }
+      else{
+         S=SS;
+      }
+      console.log(SS);
+      milliseconds=milliseconds%(SS*1000);
+   }
+   
+return H+":"+M+":"+S+"."+milliseconds;
 }
 function calculateHours(milliseconds){
-return milliseconds/60*60*1000;
+return Math.floor(milliseconds/(60*60*1000));
 }
 function calculateMinutes(milliseconds){
-   return milliseconds/60*1000;
+   return Math.floor(milliseconds/(60*1000));
 }
 function calculateSeconds(milliseconds){
-   return milliseconds/1000;
+   console.log(milliseconds);
+   return Math.floor(milliseconds/1000);
 }
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
@@ -121,7 +149,15 @@ function calculateSeconds(milliseconds){
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-  
+   console.log(new Date(date));
+  let thetaHour=date.getHours();
+  let thetaMin=date.getMinutes();
+  console.log(thetaHour,thetaMin);
+  let thetaDegreeHour=(60*thetaHour+thetaMin)/2;
+  let thetaDegreeMin=6*thetaMin;
+  console.log(thetaDegreeHour,thetaDegreeMin);
+let delta=Math.abs(thetaDegreeHour-thetaDegreeMin);
+return delta*Math.PI/180;
 }
 
 

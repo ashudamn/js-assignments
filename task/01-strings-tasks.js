@@ -131,8 +131,20 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    return null;
-}
+    let indexOfString;
+    let arrayOfStr=str.split(' ');
+    arrayOfStr.every(function(val,index){
+      console.log(val,val.indexOf(value));
+     if(val.indexOf(value)>=0){
+         arrayOfStr[index]=arrayOfStr[index].replace(value,'');
+       return false;
+      
+     }
+      return true;
+    });
+   console.log(arrayOfStr);
+    return arrayOfStr.join(' ');
+ }
 
 /**
  * Remove the first and last angle brackets from tag string

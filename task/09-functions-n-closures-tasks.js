@@ -10,7 +10,6 @@
  *                                                                                            *
  **********************************************************************************************/
 
-
 /**
  * Returns the functions composition of two specified functions f(x) and g(x).
  * The result of compose is to be a function of one argument, (lets call the argument x),
@@ -30,7 +29,6 @@ function getComposition(f,g) {
         return f(g(x));
     }
 }
-
 
 /**
  * Returns the math power function with the specified exponent
@@ -54,7 +52,6 @@ function getPowerFunction(exponent) {
     }
 }
 
-
 /**
  * Returns the polynom function of one argument based on specified coefficients.
  * See: https://en.wikipedia.org/wiki/Polynomial#Definition
@@ -69,9 +66,22 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
-    
+let result;
+let args=Array.prototype.slice.call(arguments);
+if(args.length===0){
+    result=null;
 }
-
+else{
+    result=function(x){
+        let y=0;
+        for(let i=0;i<args.length;i++){
+            y=y+Math.pow(x,args.length-i-1)*args[i];
+        }
+        return y;
+    }
+}
+return result;
+}
 
 /**
  * Memoizes passed function and returns function
@@ -88,10 +98,25 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    var cacheData = [], result;
+  result = function () {
+    let found = cacheData.find(obj => obj.funcname === func.name);
+    if (!found) {
+      var res = new cacheObject(func);
+      cacheData.push(res);
+      return res.result;
+    }
+    else {
+      return found.result;
+    }
+  }
+  return result;
 }
 
-
+var cacheObject = function (func) {
+    this.funcname = func.name;
+    this.result = func();
+  }
 /**
  * Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
@@ -108,15 +133,27 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-    throw new Error('Not implemented');
+   let result=function(){
+    let r;      
+    for(let i=0;i<attempts;i++){
+        try{
+            r=func();
+            break;
+           }
+           catch(err){
+            continue;
+           }
+       }
+       return r;
+   }
+   return result;
 }
-
 
 /**
  * Returns the logging wrapper for the specified method,
  * Logger has to log the start and end of calling the specified function.
  * Logger has to log the arguments of invoked function.
- * The fromat of output log is:
+ * The format of output log is:
  * <function name>(<arg1>, <arg2>,...,<argN>) starts
  * <function name>(<arg1>, <arg2>,...,<argN>) ends
  *
@@ -136,9 +173,29 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    throw new Error('Not implemented');
+    let summary;
+    let result=function(){
+        let args=Array.prototype.slice.call(arguments);
+        console.log(args);
+         summary=""+func.name+"(";
+       for(let i=0;i<args.length;i++){
+           console.log(args[i]);
+            if(i<args.length-1){
+                summary=summary+args[i]+",";
+            }
+            else{
+                summary=summary+args[i]+")";
+            }
+        }
+        console.log(summary);
+        logFunc(summary+' '+'starts');
+        let temp=func(...args);
+       logFunc(summary+' '+'ends');
+        return temp;
+    }
+    
+return result;
 }
-
 
 /**
  * Return the function with partial applied arguments
@@ -154,9 +211,15 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-   
+   let argsOuter=Array.prototype.slice.call(arguments);
+   argsOuter=argsOuter.slice(1);
+   let result=function(){
+       let argsInner=Array.prototype.slice.call(arguments);
+       let innerResult=argsOuter.concat(argsInner);
+       return innerResult.join('');
+   }
+   return result;
 }
-
 
 /**
  * Returns the id generator function that returns next integer starting from specified number every time when invoking.
@@ -175,13 +238,12 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    return function(){
-        let prev=startFrom;
-        startFrom=startFrom+1;
-        return prev;
+    let i=startFrom;
+    var gen=function(){
+       return i++;
     }
+    return gen;
 }
-
 
 module.exports = {
     getComposition: getComposition,

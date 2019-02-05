@@ -219,14 +219,13 @@ describe('07-yield-tasks', function() {
                 `Text mismatch at line no ${lineNo}: `
             );
         }
-
+        console.log('muline number in tests',lineNo);
         assert.equal(
             expected.length,
             lineNo,
             'Lines count is incorrect:'
         );
     });
-
 
     it.optional('getFibonacciSequence should return the Fibonacci sequence', () => {
 
@@ -248,7 +247,6 @@ describe('07-yield-tasks', function() {
         if (index<expected.length) assert.fail(index, expected.length,`sequence length should be equal to ${expected.length}`);
 
     });
-
 
     it.optional('depthTraversalTree should return the sequence of tree nodes in depth-first order', () => {
 
@@ -282,7 +280,7 @@ describe('07-yield-tasks', function() {
         if (index<expected.length) assert.fail(index, expected.length,`sequence length should be equal to ${expected.length}`);
     });
 
-    const MAX_NODE_COUNT = 100000;
+    const MAX_NODE_COUNT = 10000;
 
     function createDeepTree() {
         var root = { n: MAX_NODE_COUNT };
@@ -330,7 +328,6 @@ describe('07-yield-tasks', function() {
         if (index-1<MAX_NODE_COUNT) assert.fail(index-1, MAX_NODE_COUNT,`sequence length should be equal to ${MAX_NODE_COUNT}`);
     });
 
-
     it.optional('breadthTraversalTree should return the sequence of tree nodes in depth-first order', () => {
 
       /*
@@ -363,7 +360,6 @@ describe('07-yield-tasks', function() {
         if (index<expected.length) assert.fail(index, expected.length,`sequence length should be equal to ${expected.length}`);
     });
 
-
     it.optional('breadthTraversalTree should process a deep tree', () => {
         var root = createDeepTree();
         var index = 1;
@@ -393,7 +389,6 @@ describe('07-yield-tasks', function() {
         }
         if (index-1<MAX_NODE_COUNT) assert.fail(index-1, MAX_NODE_COUNT,`sequence length should be equal to ${MAX_NODE_COUNT}`);
     });
-
 
     it.optional('mergeSortedSequences should merge two sorted sequences into one sorted sequence', () => {
         const ITEMS_COUNT = 500;
@@ -430,7 +425,6 @@ describe('07-yield-tasks', function() {
         }
         assert.equal(count, ITEMS_COUNT);
         
-
         var minus1 = function* () { yield -1; }
         expected = -1;
         count = 0;

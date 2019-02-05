@@ -8,19 +8,18 @@
  *                                                                                          *
  ********************************************************************************************/
 
-
 /**
  * Returns the lines sequence of "99 Bottles of Beer" song:
  *
- *  '99 bottles of beer on the wall, 99 bottles of beer.'
- *  'Take one down and pass it around, 98 bottles of beer on the wall.'
- *  '98 bottles of beer on the wall, 98 bottles of beer.'
- *  'Take one down and pass it around, 97 bottles of beer on the wall.'
+ *  99 bottles of beer on the wall, 99 bottles of beer.
+ *  Take one down and pass it around, 98 bottles of beer on the wall.
+ *  98 bottles of beer on the wall, 98 bottles of beer.
+ *  Take one down and pass it around, 97 bottles of beer on the wall.
  *  ...
- *  '1 bottle of beer on the wall, 1 bottle of beer.'
- *  'Take one down and pass it around, no more bottles of beer on the wall.'
- *  'No more bottles of beer on the wall, no more bottles of beer.'
- *  'Go to the store and buy some more, 99 bottles of beer on the wall.'
+ *  1 bottle of beer on the wall, 1 bottle of beer.
+ *  Take one down and pass it around, no more bottles of beer on the wall.
+ *  No more bottles of beer on the wall, no more bottles of beer.
+ *  Go to the store and buy some more, 99 bottles of beer on the wall.
  *
  * See the full text at
  * http://99-bottles-of-beer.net/lyrics.html
@@ -33,11 +32,210 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    var myArray = BottlesOfBeer.split('\n');
+    return yield* myArray;
 }
-
-
-/**
+const BottlesOfBeer = `99 bottles of beer on the wall, 99 bottles of beer.
+Take one down and pass it around, 98 bottles of beer on the wall.
+98 bottles of beer on the wall, 98 bottles of beer.
+Take one down and pass it around, 97 bottles of beer on the wall.
+97 bottles of beer on the wall, 97 bottles of beer.
+Take one down and pass it around, 96 bottles of beer on the wall.
+96 bottles of beer on the wall, 96 bottles of beer.
+Take one down and pass it around, 95 bottles of beer on the wall.
+95 bottles of beer on the wall, 95 bottles of beer.
+Take one down and pass it around, 94 bottles of beer on the wall.
+94 bottles of beer on the wall, 94 bottles of beer.
+Take one down and pass it around, 93 bottles of beer on the wall.
+93 bottles of beer on the wall, 93 bottles of beer.
+Take one down and pass it around, 92 bottles of beer on the wall.
+92 bottles of beer on the wall, 92 bottles of beer.
+Take one down and pass it around, 91 bottles of beer on the wall.
+91 bottles of beer on the wall, 91 bottles of beer.
+Take one down and pass it around, 90 bottles of beer on the wall.
+90 bottles of beer on the wall, 90 bottles of beer.
+Take one down and pass it around, 89 bottles of beer on the wall.
+89 bottles of beer on the wall, 89 bottles of beer.
+Take one down and pass it around, 88 bottles of beer on the wall.
+88 bottles of beer on the wall, 88 bottles of beer.
+Take one down and pass it around, 87 bottles of beer on the wall.
+87 bottles of beer on the wall, 87 bottles of beer.
+Take one down and pass it around, 86 bottles of beer on the wall.
+86 bottles of beer on the wall, 86 bottles of beer.
+Take one down and pass it around, 85 bottles of beer on the wall.
+85 bottles of beer on the wall, 85 bottles of beer.
+Take one down and pass it around, 84 bottles of beer on the wall.
+84 bottles of beer on the wall, 84 bottles of beer.
+Take one down and pass it around, 83 bottles of beer on the wall.
+83 bottles of beer on the wall, 83 bottles of beer.
+Take one down and pass it around, 82 bottles of beer on the wall.
+82 bottles of beer on the wall, 82 bottles of beer.
+Take one down and pass it around, 81 bottles of beer on the wall.
+81 bottles of beer on the wall, 81 bottles of beer.
+Take one down and pass it around, 80 bottles of beer on the wall.
+80 bottles of beer on the wall, 80 bottles of beer.
+Take one down and pass it around, 79 bottles of beer on the wall.
+79 bottles of beer on the wall, 79 bottles of beer.
+Take one down and pass it around, 78 bottles of beer on the wall.
+78 bottles of beer on the wall, 78 bottles of beer.
+Take one down and pass it around, 77 bottles of beer on the wall.
+77 bottles of beer on the wall, 77 bottles of beer.
+Take one down and pass it around, 76 bottles of beer on the wall.
+76 bottles of beer on the wall, 76 bottles of beer.
+Take one down and pass it around, 75 bottles of beer on the wall.
+75 bottles of beer on the wall, 75 bottles of beer.
+Take one down and pass it around, 74 bottles of beer on the wall.
+74 bottles of beer on the wall, 74 bottles of beer.
+Take one down and pass it around, 73 bottles of beer on the wall.
+73 bottles of beer on the wall, 73 bottles of beer.
+Take one down and pass it around, 72 bottles of beer on the wall.
+72 bottles of beer on the wall, 72 bottles of beer.
+Take one down and pass it around, 71 bottles of beer on the wall.
+71 bottles of beer on the wall, 71 bottles of beer.
+Take one down and pass it around, 70 bottles of beer on the wall.
+70 bottles of beer on the wall, 70 bottles of beer.
+Take one down and pass it around, 69 bottles of beer on the wall.
+69 bottles of beer on the wall, 69 bottles of beer.
+Take one down and pass it around, 68 bottles of beer on the wall.
+68 bottles of beer on the wall, 68 bottles of beer.
+Take one down and pass it around, 67 bottles of beer on the wall.
+67 bottles of beer on the wall, 67 bottles of beer.
+Take one down and pass it around, 66 bottles of beer on the wall.
+66 bottles of beer on the wall, 66 bottles of beer.
+Take one down and pass it around, 65 bottles of beer on the wall.
+65 bottles of beer on the wall, 65 bottles of beer.
+Take one down and pass it around, 64 bottles of beer on the wall.
+64 bottles of beer on the wall, 64 bottles of beer.
+Take one down and pass it around, 63 bottles of beer on the wall.
+63 bottles of beer on the wall, 63 bottles of beer.
+Take one down and pass it around, 62 bottles of beer on the wall.
+62 bottles of beer on the wall, 62 bottles of beer.
+Take one down and pass it around, 61 bottles of beer on the wall.
+61 bottles of beer on the wall, 61 bottles of beer.
+Take one down and pass it around, 60 bottles of beer on the wall.
+60 bottles of beer on the wall, 60 bottles of beer.
+Take one down and pass it around, 59 bottles of beer on the wall.
+59 bottles of beer on the wall, 59 bottles of beer.
+Take one down and pass it around, 58 bottles of beer on the wall.
+58 bottles of beer on the wall, 58 bottles of beer.
+Take one down and pass it around, 57 bottles of beer on the wall.
+57 bottles of beer on the wall, 57 bottles of beer.
+Take one down and pass it around, 56 bottles of beer on the wall.
+56 bottles of beer on the wall, 56 bottles of beer.
+Take one down and pass it around, 55 bottles of beer on the wall.
+55 bottles of beer on the wall, 55 bottles of beer.
+Take one down and pass it around, 54 bottles of beer on the wall.
+54 bottles of beer on the wall, 54 bottles of beer.
+Take one down and pass it around, 53 bottles of beer on the wall.
+53 bottles of beer on the wall, 53 bottles of beer.
+Take one down and pass it around, 52 bottles of beer on the wall.
+52 bottles of beer on the wall, 52 bottles of beer.
+Take one down and pass it around, 51 bottles of beer on the wall.
+51 bottles of beer on the wall, 51 bottles of beer.
+Take one down and pass it around, 50 bottles of beer on the wall.
+50 bottles of beer on the wall, 50 bottles of beer.
+Take one down and pass it around, 49 bottles of beer on the wall.
+49 bottles of beer on the wall, 49 bottles of beer.
+Take one down and pass it around, 48 bottles of beer on the wall.
+48 bottles of beer on the wall, 48 bottles of beer.
+Take one down and pass it around, 47 bottles of beer on the wall.
+47 bottles of beer on the wall, 47 bottles of beer.
+Take one down and pass it around, 46 bottles of beer on the wall.
+46 bottles of beer on the wall, 46 bottles of beer.
+Take one down and pass it around, 45 bottles of beer on the wall.
+45 bottles of beer on the wall, 45 bottles of beer.
+Take one down and pass it around, 44 bottles of beer on the wall.
+44 bottles of beer on the wall, 44 bottles of beer.
+Take one down and pass it around, 43 bottles of beer on the wall.
+43 bottles of beer on the wall, 43 bottles of beer.
+Take one down and pass it around, 42 bottles of beer on the wall.
+42 bottles of beer on the wall, 42 bottles of beer.
+Take one down and pass it around, 41 bottles of beer on the wall.
+41 bottles of beer on the wall, 41 bottles of beer.
+Take one down and pass it around, 40 bottles of beer on the wall.
+40 bottles of beer on the wall, 40 bottles of beer.
+Take one down and pass it around, 39 bottles of beer on the wall.
+39 bottles of beer on the wall, 39 bottles of beer.
+Take one down and pass it around, 38 bottles of beer on the wall.
+38 bottles of beer on the wall, 38 bottles of beer.
+Take one down and pass it around, 37 bottles of beer on the wall.
+37 bottles of beer on the wall, 37 bottles of beer.
+Take one down and pass it around, 36 bottles of beer on the wall.
+36 bottles of beer on the wall, 36 bottles of beer.
+Take one down and pass it around, 35 bottles of beer on the wall.
+35 bottles of beer on the wall, 35 bottles of beer.
+Take one down and pass it around, 34 bottles of beer on the wall.
+34 bottles of beer on the wall, 34 bottles of beer.
+Take one down and pass it around, 33 bottles of beer on the wall.
+33 bottles of beer on the wall, 33 bottles of beer.
+Take one down and pass it around, 32 bottles of beer on the wall.
+32 bottles of beer on the wall, 32 bottles of beer.
+Take one down and pass it around, 31 bottles of beer on the wall.
+31 bottles of beer on the wall, 31 bottles of beer.
+Take one down and pass it around, 30 bottles of beer on the wall.
+30 bottles of beer on the wall, 30 bottles of beer.
+Take one down and pass it around, 29 bottles of beer on the wall.
+29 bottles of beer on the wall, 29 bottles of beer.
+Take one down and pass it around, 28 bottles of beer on the wall.
+28 bottles of beer on the wall, 28 bottles of beer.
+Take one down and pass it around, 27 bottles of beer on the wall.
+27 bottles of beer on the wall, 27 bottles of beer.
+Take one down and pass it around, 26 bottles of beer on the wall.
+26 bottles of beer on the wall, 26 bottles of beer.
+Take one down and pass it around, 25 bottles of beer on the wall.
+25 bottles of beer on the wall, 25 bottles of beer.
+Take one down and pass it around, 24 bottles of beer on the wall.
+24 bottles of beer on the wall, 24 bottles of beer.
+Take one down and pass it around, 23 bottles of beer on the wall.
+23 bottles of beer on the wall, 23 bottles of beer.
+Take one down and pass it around, 22 bottles of beer on the wall.
+22 bottles of beer on the wall, 22 bottles of beer.
+Take one down and pass it around, 21 bottles of beer on the wall.
+21 bottles of beer on the wall, 21 bottles of beer.
+Take one down and pass it around, 20 bottles of beer on the wall.
+20 bottles of beer on the wall, 20 bottles of beer.
+Take one down and pass it around, 19 bottles of beer on the wall.
+19 bottles of beer on the wall, 19 bottles of beer.
+Take one down and pass it around, 18 bottles of beer on the wall.
+18 bottles of beer on the wall, 18 bottles of beer.
+Take one down and pass it around, 17 bottles of beer on the wall.
+17 bottles of beer on the wall, 17 bottles of beer.
+Take one down and pass it around, 16 bottles of beer on the wall.
+16 bottles of beer on the wall, 16 bottles of beer.
+Take one down and pass it around, 15 bottles of beer on the wall.
+15 bottles of beer on the wall, 15 bottles of beer.
+Take one down and pass it around, 14 bottles of beer on the wall.
+14 bottles of beer on the wall, 14 bottles of beer.
+Take one down and pass it around, 13 bottles of beer on the wall.
+13 bottles of beer on the wall, 13 bottles of beer.
+Take one down and pass it around, 12 bottles of beer on the wall.
+12 bottles of beer on the wall, 12 bottles of beer.
+Take one down and pass it around, 11 bottles of beer on the wall.
+11 bottles of beer on the wall, 11 bottles of beer.
+Take one down and pass it around, 10 bottles of beer on the wall.
+10 bottles of beer on the wall, 10 bottles of beer.
+Take one down and pass it around, 9 bottles of beer on the wall.
+9 bottles of beer on the wall, 9 bottles of beer.
+Take one down and pass it around, 8 bottles of beer on the wall.
+8 bottles of beer on the wall, 8 bottles of beer.
+Take one down and pass it around, 7 bottles of beer on the wall.
+7 bottles of beer on the wall, 7 bottles of beer.
+Take one down and pass it around, 6 bottles of beer on the wall.
+6 bottles of beer on the wall, 6 bottles of beer.
+Take one down and pass it around, 5 bottles of beer on the wall.
+5 bottles of beer on the wall, 5 bottles of beer.
+Take one down and pass it around, 4 bottles of beer on the wall.
+4 bottles of beer on the wall, 4 bottles of beer.
+Take one down and pass it around, 3 bottles of beer on the wall.
+3 bottles of beer on the wall, 3 bottles of beer.
+Take one down and pass it around, 2 bottles of beer on the wall.
+2 bottles of beer on the wall, 2 bottles of beer.
+Take one down and pass it around, 1 bottle of beer on the wall.
+1 bottle of beer on the wall, 1 bottle of beer.
+Take one down and pass it around, no more bottles of beer on the wall.
+No more bottles of beer on the wall, no more bottles of beer.
+Go to the store and buy some more, 99 bottles of beer on the wall.`
+/*
  * Returns the Fibonacci sequence:
  *   0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, ...
  *
@@ -47,16 +245,60 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    /*var fibonacciArray=[],sum,prev1,prev2;
+    for(let i=0;i<39;i++){
+        if(i===0){
+            prev1=0;
+            prev2=0;
+            sum=prev1+prev2;
+            fibonacciArray.push(sum);
+        }
+        else if(i===1){
+            prev1=0;
+            prev2=1;
+            sum=prev1+prev2;
+            fibonacciArray.push(sum);
+        }
+        else{
+            sum=prev1+prev2;
+            prev1=prev2;
+            prev2=sum;
+            fibonacciArray.push(sum);
+        }
+        
+    }
+    return yield* fibonacciArray;*/
+    let prev1 = 0, prev2 = 0, sum;
+    let i = 0;
+    while (true) {
+        if (i == 0) {
+            prev1 = 0;
+            prev2 = 0;
+            sum = prev1 + prev2;
+            yield sum;
+        }
+        else if (i == 1) {
+            prev1 = 0;
+            prev2 = 1;
+            sum = prev1 + prev2;
+            yield sum;
+        }
+        else {
+            sum = prev1 + prev2;
+            prev1 = prev2;
+            prev2 = sum;
+            yield sum;
+        }
+        i++;
+    }
 }
-
 
 /**
  * Traverses a tree using the depth-first strategy
  * See details: https://en.wikipedia.org/wiki/Depth-first_search
  *
  * Each node have child nodes in node.children array.
- * The leaf nodes do not have 'children' property.
+ * The leaf nodes do not have children property.
  *
  * @params {object} root the tree root
  * @return {Iterable.<object>} the sequence of all tree nodes in depth-first order
@@ -81,17 +323,36 @@ function* getFibonacciSequence() {
  *  depthTraversalTree(node1) => node1, node2, node3, node4, node5, node6, node7, node8
  *
  */
-function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
-}
 
+function* depthTraversalTree(root) {
+    var visitedMap = new Map();
+    var dfsStack = [];
+    var dfsNodes = [];
+    dfsStack.push(root);
+    while (dfsStack.length != 0) {
+        var nodeToVisit = dfsStack.pop();
+        if (!visitedMap.has(nodeToVisit.n)) {
+            visitedMap.set(nodeToVisit.n, true);
+            dfsNodes.push({ n: nodeToVisit.n });
+        }
+        if (nodeToVisit.children) {
+            for (let i = nodeToVisit.children.length - 1; i >= 0; i--) {
+                if (!visitedMap.has(nodeToVisit.children[i].n)) {
+                    dfsStack.push(nodeToVisit.children[i]);
+                }
+            }
+        }
+    }
+    // console.log(dfsNodes);
+    return yield* dfsNodes;
+}
 
 /**
  * Traverses a tree using the breadth-first strategy
  * See details: https://en.wikipedia.org/wiki/Breadth-first_search
  *
  * Each node have child nodes in node.children array.
- * The leaf nodes do not have 'children' property.
+ * The leaf nodes do not have children property.
  *
  * @params {object} root the tree root
  * @return {Iterable.<object>} the sequence of all tree nodes in breadth-first order
@@ -107,10 +368,33 @@ function* depthTraversalTree(root) {
  *           8
  *
  */
-function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
-}
 
+function* breadthTraversalTree(root) {
+    //throw new Error('Not implemented');
+    var visitedBfs = [];
+    var bfsNodeQueue = [];
+    var visitedMap = new Map();
+    bfsNodeQueue.push(root);
+    visitedBfs.push({ n: root.n });
+    while (bfsNodeQueue.length) {
+        var nodeTovisit = bfsNodeQueue.shift();
+        visitedMap.delete(nodeTovisit.n);
+        if (nodeTovisit.children) {
+            for (let i = 0; i < nodeTovisit.children.length; i++) {
+                if (!visitedMap.has(nodeTovisit.children[i].n)) {
+                    //console.log('pushing '+nodeTovisit.children[i].n);
+                    visitedBfs.push({ n: nodeTovisit.children[i].n });
+                    bfsNodeQueue.push(nodeTovisit.children[i]);
+                    visitedMap.set(nodeTovisit.children[i].n, true);
+
+                }
+            }
+        }
+
+    }
+    //console.log(visitedBfs);
+    return yield* visitedBfs;
+}
 
 /**
  * Merges two yield-style sorted sequences into the one sorted sequence.
@@ -125,10 +409,49 @@ function* breadthTraversalTree(root) {
  *   [ 0 ], [ 2, 4, 6, ... ]  => [ 0, 2, 4, 6, ... ]
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
+var mergedArray;
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    let s1 = source1();
+    let s2 = source2();
+    let a = s1.next();
+    let b = s2.next();
+    //console.log(a,b);
+    while(!a.done && !b.done){
+        if(a.value>b.value){
+            //console.log(b.value);
+            yield b.value;
+            b=s2.next();
+        }
+        else{
+            //console.log(a.value);
+            yield a.value;
+            a=s1.next();
+        }
+        //console.log(a,b);
+    }
+    if(a.done){
+       // console.log(a.value);
+       // yield a.value;
+        while(!b.done){
+           // console.log(b.value);
+            yield b.value;
+            b=s2.next();
+        }
+        //console.log(b.value);
+        //yield b.value;
+    }
+    else if(b.done){
+        //console.log(b.value);
+        //yield b.value;
+        while(!a.done){
+            //console.log(a.value);
+            yield a.value;
+            a=s1.next();
+        }
+        //console.log(a.value);
+        //yield a.value;
+    }
 }
-
 
 module.exports = {
     get99BottlesOfBeer: get99BottlesOfBeer,

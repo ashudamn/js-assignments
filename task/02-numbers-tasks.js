@@ -113,7 +113,10 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-
+let dotProduct=x1*x2+y1*y2;
+let firstMod=Math.sqrt(Math.pow(x1,2)+Math.pow(y1,2));
+let secondMod=Math.sqrt(Math.pow(x2,2)+Math.pow(y2,2));
+return Math.acos(dotProduct/(firstMod*secondMod));
 }
 
 /**
@@ -183,20 +186,16 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    if (pow > 0) {
-        var powOfTen = Math.pow(10, pow);
-        var remainder = num % powOfTen;
-        var divOfTen = Math.pow(10, pow - 1);
-        if (remainder / divOfTen > 5) {
-
-        }
-        else {
-
-        }
-    }
-    else {
-        return num;
-    }
+let powOfTen=Math.pow(10,pow);
+let mod=num%powOfTen;
+let result;
+if(mod>powOfTen/2){
+result=num+powOfTen-mod;
+}
+else{
+    result=num-mod;
+}
+return result;
 }
 
 /**
