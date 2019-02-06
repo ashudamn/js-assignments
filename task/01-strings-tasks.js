@@ -7,8 +7,6 @@
  *                                                                                          *
  ********************************************************************************************/
 
-
-
 /**
  * Returns the result of concatenation of two strings.
  *
@@ -24,7 +22,6 @@
 function concatenateStrings(value1, value2) {
     return value1 + value2;
 }
-
 
 /**
  * Returns the length of given string.
@@ -72,7 +69,6 @@ function extractNameFromTemplate(value) {
     let fullname = value.slice(value.indexOf(' ') + 1, value.indexOf('!'));
     return fullname;
 }
-
 
 /**
  * Returns a first char of the given string.
@@ -131,6 +127,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
+    throw new Error('Not implemented');
     let indexOfString;
     let arrayOfStr=str.split(' ');
     arrayOfStr.every(function(val,index){
@@ -160,7 +157,6 @@ function removeFirstOccurrences(str, value) {
 function unbracketTag(str) {
     return str.slice(str.indexOf('<') + 1, str.lastIndexOf('>'));
 }
-
 
 /**
  * Converts all characters of the specified string into the upper case
@@ -314,7 +310,6 @@ function isString(value) {
     return false;
 }
 
-
 /**
  * Returns playid card id.
  * 
@@ -360,7 +355,6 @@ function getCardId(value) {
     }
     return id;
 }
-
 
 module.exports = {
     concatenateStrings: concatenateStrings,

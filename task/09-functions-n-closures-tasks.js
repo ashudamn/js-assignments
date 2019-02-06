@@ -173,6 +173,7 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
+    throw new Error('Not implemented');
     let summary;
     let result=function(){
         let args=Array.prototype.slice.call(arguments);

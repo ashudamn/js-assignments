@@ -594,6 +594,7 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
+   throw new Error('Not implemented');
   let countryToCity=new Map();
   array.map(function(val,index){
      if(countryToCity.has(keySelector(val))){
@@ -641,7 +642,7 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-
+   throw new Error('Not implemented');
 }
 
 /**

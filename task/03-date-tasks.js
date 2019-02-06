@@ -8,7 +8,6 @@
  *                                                                                          *
  ********************************************************************************************/
 
-
 /**
  * Parses a rfc2822 string date representation into date value
  * For rfc2822 date specification refer to : http://tools.ietf.org/html/rfc2822#page-14
@@ -39,7 +38,6 @@ function parseDataFromRfc2822(value) {
 function parseDataFromIso8601(value) {
    return new Date(value);
 }
-
 
 /**
  * Returns true if specified date is leap year and false otherwise
@@ -73,7 +71,6 @@ function isLeapYear(date) {
    return leapYearstatus;
 }
 
-
 /**
  * Returns the string represention of the timespan between two dates.
  * The format of output string is "HH:mm:ss.sss"
@@ -90,6 +87,7 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
+   throw new Error('Not implemented');
    var milliseconds=endDate-startDate;
    var HH=calculateHours(milliseconds);
    var H,M,S,mm;
@@ -149,6 +147,7 @@ function calculateSeconds(milliseconds){
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
+   throw new Error('Not implemented');
    console.log(new Date(date));
   let thetaHour=date.getHours();
   let thetaMin=date.getMinutes();
@@ -159,7 +158,6 @@ function angleBetweenClockHands(date) {
 let delta=Math.abs(thetaDegreeHour-thetaDegreeMin);
 return delta*Math.PI/180;
 }
-
 
 module.exports = {
    parseDataFromRfc2822: parseDataFromRfc2822,
