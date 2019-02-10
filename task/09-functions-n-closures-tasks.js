@@ -24,8 +24,8 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.acos(x))
  *
  */
-function getComposition(f,g) {
-    return function(x){
+function getComposition(f, g) {
+    return function (x) {
         return f(g(x));
     }
 }
@@ -47,8 +47,8 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    return function(x){
-        return Math.pow(x,exponent);
+    return function (x) {
+        return Math.pow(x, exponent);
     }
 }
 
@@ -66,21 +66,21 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
-let result;
-let args=Array.prototype.slice.call(arguments);
-if(args.length===0){
-    result=null;
-}
-else{
-    result=function(x){
-        let y=0;
-        for(let i=0;i<args.length;i++){
-            y=y+Math.pow(x,args.length-i-1)*args[i];
-        }
-        return y;
+    let result;
+    let args = Array.prototype.slice.call(arguments);
+    if (args.length === 0) {
+        result = null;
     }
-}
-return result;
+    else {
+        result = function (x) {
+            let y = 0;
+            for (let i = 0; i < args.length; i++) {
+                y = y + Math.pow(x, args.length - i - 1) * args[i];
+            }
+            return y;
+        }
+    }
+    return result;
 }
 
 /**
@@ -99,24 +99,24 @@ return result;
  */
 function memoize(func) {
     var cacheData = [], result;
-  result = function () {
-    let found = cacheData.find(obj => obj.funcname === func.name);
-    if (!found) {
-      var res = new cacheObject(func);
-      cacheData.push(res);
-      return res.result;
+    result = function () {
+        let found = cacheData.find(obj => obj.funcname === func.name);
+        if (!found) {
+            var res = new cacheObject(func);
+            cacheData.push(res);
+            return res.result;
+        }
+        else {
+            return found.result;
+        }
     }
-    else {
-      return found.result;
-    }
-  }
-  return result;
+    return result;
 }
 
 var cacheObject = function (func) {
     this.funcname = func.name;
     this.result = func();
-  }
+}
 /**
  * Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
@@ -133,20 +133,20 @@ var cacheObject = function (func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-   let result=function(){
-    let r;      
-    for(let i=0;i<attempts;i++){
-        try{
-            r=func();
-            break;
-           }
-           catch(err){
-            continue;
-           }
-       }
-       return r;
-   }
-   return result;
+    let result = function () {
+        let r;
+        for (let i = 0; i < attempts; i++) {
+            try {
+                r = func();
+                break;
+            }
+            catch (err) {
+                continue;
+            }
+        }
+        return r;
+    }
+    return result;
 }
 
 /**
@@ -173,29 +173,14 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    throw new Error('Not implemented');
-    let summary;
-    let result=function(){
-        let args=Array.prototype.slice.call(arguments);
-        console.log(args);
-         summary=""+func.name+"(";
-       for(let i=0;i<args.length;i++){
-           console.log(args[i]);
-            if(i<args.length-1){
-                summary=summary+args[i]+",";
-            }
-            else{
-                summary=summary+args[i]+")";
-            }
-        }
-        console.log(summary);
-        logFunc(summary+' '+'starts');
-        let temp=func(...args);
-       logFunc(summary+' '+'ends');
-        return temp;
+    return function () {
+        let arg = (JSON.stringify(Array.from(arguments))).slice(1, -1);
+        let start = `${func.name}(${arg})`;
+        logFunc(`${start} starts`);
+        let result = func.apply(null, arguments);
+        logFunc(`${func.name}(${arg}) ends`);
+        return result;
     }
-    
-return result;
 }
 
 /**
@@ -212,14 +197,14 @@ return result;
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-   let argsOuter=Array.prototype.slice.call(arguments);
-   argsOuter=argsOuter.slice(1);
-   let result=function(){
-       let argsInner=Array.prototype.slice.call(arguments);
-       let innerResult=argsOuter.concat(argsInner);
-       return innerResult.join('');
-   }
-   return result;
+    let argsOuter = Array.prototype.slice.call(arguments);
+    argsOuter = argsOuter.slice(1);
+    let result = function () {
+        let argsInner = Array.prototype.slice.call(arguments);
+        let innerResult = argsOuter.concat(argsInner);
+        return innerResult.join('');
+    }
+    return result;
 }
 
 /**
@@ -239,9 +224,9 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    let i=startFrom;
-    var gen=function(){
-       return i++;
+    let i = startFrom;
+    var gen = function () {
+        return i++;
     }
     return gen;
 }

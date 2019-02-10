@@ -55,18 +55,18 @@ function parseDataFromIso8601(value) {
  */
 function isLeapYear(date) {
    var year = date.getFullYear();
-   var leapYearstatus=false;
+   var leapYearstatus = false;
    if (year % 4 == 0) {
       if (year % 400 == 0) {
-         leapYearstatus=true;
+         leapYearstatus = true;
       }
-      else if (year % 100 == 0){
-         leapYearstatus=false;
+      else if (year % 100 == 0) {
+         leapYearstatus = false;
       }
-      else{
-         leapYearstatus=true;
+      else {
+         leapYearstatus = true;
       }
-      
+
    }
    return leapYearstatus;
 }
@@ -87,51 +87,27 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
-   var milliseconds=endDate-startDate;
-   var HH=calculateHours(milliseconds);
-   var H,M,S,mm;
-   if(HH%10==HH){
-      H="0"+HH;
-   }
-   else{
-      H=HH;
-   }
-   console.log(HH);
-   milliseconds=milliseconds%(HH*60*60*1000);
-   var MM=calculateMinutes(milliseconds);
-   if(MM%10==MM){
-      M="0"+MM;
-   }
-   else{
-      M=MM;
-   }
-   console.log(MM);
-   if(MM!=0){
-      milliseconds=milliseconds%(MM*60*1000);
-      var SS=calculateSeconds(milliseconds);
-      console.log("SS",SS);
-      if(SS%10==SS){
-         S="0"+SS;
-      }
-      else{
-         S=SS;
-      }
-      console.log(SS);
-      milliseconds=milliseconds%(SS*1000);
-   }
-   
-return H+":"+M+":"+S+"."+milliseconds;
+   let date = new Date(endDate - startDate);
+   let sss = date.getMilliseconds();
+   let ss = date.getUTCSeconds();
+   let mm = date.getUTCMinutes();
+   let hh = Math.floor((date / 3600000));
+
+   hh < 10 ? hh = '0' + hh : hh;
+   mm < 10 ? mm = '0' + mm : mm;
+   ss < 10 ? ss = '0' + ss : ss;
+   sss < 10 ? sss = '00' + sss : sss;
+   return hh + ':' + mm + ':' + ss + '.' + sss;
 }
-function calculateHours(milliseconds){
-return Math.floor(milliseconds/(60*60*1000));
+function calculateHours(milliseconds) {
+   return Math.floor(milliseconds / (60 * 60 * 1000));
 }
-function calculateMinutes(milliseconds){
-   return Math.floor(milliseconds/(60*1000));
+function calculateMinutes(milliseconds) {
+   return Math.floor(milliseconds / (60 * 1000));
 }
-function calculateSeconds(milliseconds){
+function calculateSeconds(milliseconds) {
    console.log(milliseconds);
-   return Math.floor(milliseconds/1000);
+   return Math.floor(milliseconds / 1000);
 }
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
@@ -147,16 +123,14 @@ function calculateSeconds(milliseconds){
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-   throw new Error('Not implemented');
-   console.log(new Date(date));
-  let thetaHour=date.getHours();
-  let thetaMin=date.getMinutes();
-  console.log(thetaHour,thetaMin);
-  let thetaDegreeHour=(60*thetaHour+thetaMin)/2;
-  let thetaDegreeMin=6*thetaMin;
-  console.log(thetaDegreeHour,thetaDegreeMin);
-let delta=Math.abs(thetaDegreeHour-thetaDegreeMin);
-return delta*Math.PI/180;
+   let hours = date.getUTCHours();
+   (hours >= 12) ? hours = hours - 12 : hours;
+   let min = date.getUTCMinutes();
+   let ang = Math.abs(0.5 * ((60 * hours) - (11 * min)));
+   if (ang > 180) {
+      return (Math.PI * (360 - ang)) / 180;
+   }
+   return ((Math.PI * ang) / 180);
 }
 
 module.exports = {

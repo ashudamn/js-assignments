@@ -343,10 +343,10 @@ function sortDigitNamesByNumericOrder(arr) {
    return arr.sort(customSortFunction);
 
 }
-function customSortFunction(num1Name,num2Name){
-return strToNum[num1Name]-strToNum[num2Name];
+function customSortFunction(num1Name, num2Name) {
+   return strToNum[num1Name] - strToNum[num2Name];
 }
-const strToNum={'zero':0,'one':1,'two':2,'three':3,'four':4,'five':5,'six':6,'seven':7,'eight':8,'nine':9};
+const strToNum = { 'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9 };
 /** 
  * Returns the sum of all items in the specified array of numbers
  * 
@@ -484,15 +484,15 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-let twoDArray=new Array(n);
-twoDArray.fill(0);
-twoDArray.map(function(val,index){
-   let temp=new Array(n);
-   temp.fill(0);
-   temp[index]=1;
-   twoDArray[index]=temp;
-});
-return twoDArray;
+   let twoDArray = new Array(n);
+   twoDArray.fill(0);
+   twoDArray.map(function (val, index) {
+      let temp = new Array(n);
+      temp.fill(0);
+      temp[index] = 1;
+      twoDArray[index] = temp;
+   });
+   return twoDArray;
 }
 
 /**
@@ -509,16 +509,16 @@ return twoDArray;
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   let newArr=new Array(Math.abs(end-start)+1);
+   let newArr = new Array(Math.abs(end - start) + 1);
    newArr.fill(1);
-    newArr.map(function(val,index){
+   newArr.map(function (val, index) {
       //console.log(newArr[index],index,start);
-      newArr[index]=start;
-       start++;
-     
-    });
-    return newArr;
- }
+      newArr[index] = start;
+      start++;
+
+   });
+   return newArr;
+}
 
 /**
  * Returns array containing only unique values from the specified array.
@@ -533,8 +533,8 @@ function getIntervalArray(start, end) {
  */
 function distinct(arr) {
 
-   arr.sort(function(a,b){
-      return a-b;
+   arr.sort(function (a, b) {
+      return a - b;
    });
    let prev = arr[0];
    let temp = [];
@@ -554,11 +554,11 @@ function distinct(arr) {
       }
    });
    newArr.push(temp);
-   temp=[];
-   newArr.map(function(val,index){
-      
-         temp.push(newArr[index][0]);
-      
+   temp = [];
+   newArr.map(function (val, index) {
+
+      temp.push(newArr[index][0]);
+
    });
    return temp;
 }
@@ -595,22 +595,22 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
    throw new Error('Not implemented');
-  let countryToCity=new Map();
-  array.map(function(val,index){
-     if(countryToCity.has(keySelector(val))){
-      let tempArray=countryToCity.get(keySelector(val));
-      countryToCity.delete(keySelector(val));
-      tempArray.push(valueSelector(val));
-      countryToCity.set(keySelector(val),tempArray);
-     }
-     else{
-      let tempArray=[];
-      tempArray.push(valueSelector(val));
-      countryToCity.set(keySelector(val),tempArray);
-     }
-  });
-  console.log(countryToCity);
-  return countryToCity;
+   let countryToCity = new Map();
+   array.map(function (val, index) {
+      if (countryToCity.has(keySelector(val))) {
+         let tempArray = countryToCity.get(keySelector(val));
+         countryToCity.delete(keySelector(val));
+         tempArray.push(valueSelector(val));
+         countryToCity.set(keySelector(val), tempArray);
+      }
+      else {
+         let tempArray = [];
+         tempArray.push(valueSelector(val));
+         countryToCity.set(keySelector(val), tempArray);
+      }
+   });
+   console.log(countryToCity);
+   return countryToCity;
 }
 
 /**
@@ -642,7 +642,18 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-   throw new Error('Not implemented');
+   let x = indexes[0], y = indexes[1], z = indexes[2], result;
+
+   if (indexes.length === 1) {
+      result = arr[x];
+   }
+   if (indexes.length === 2) {
+      result = arr[x][y];
+   }
+   if (indexes.length === 3) {
+      result = arr[x][y][z];
+   }
+   return result;
 }
 
 /**
