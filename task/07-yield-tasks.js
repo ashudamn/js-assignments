@@ -268,8 +268,7 @@ function* getFibonacciSequence() {
         
     }
     return yield* fibonacciArray;*/
-    let prev1 = 0, prev2 = 0, sum;
-    let i = 0;
+    let prev1 = 0, prev2 = 0, sum,i = 0;
     while (true) {
         if (i == 0) {
             prev1 = 0;
@@ -325,12 +324,10 @@ function* getFibonacciSequence() {
  */
 
 function* depthTraversalTree(root) {
-    var visitedMap = new Map();
-    var dfsStack = [];
-    var dfsNodes = [];
+    var visitedMap = new Map(), dfsStack = [], dfsNodes = [],nodeToVisit;
     dfsStack.push(root);
     while (dfsStack.length != 0) {
-        var nodeToVisit = dfsStack.pop();
+        nodeToVisit = dfsStack.pop();
         if (!visitedMap.has(nodeToVisit.n)) {
             visitedMap.set(nodeToVisit.n, true);
             dfsNodes.push({ n: nodeToVisit.n });
@@ -343,7 +340,6 @@ function* depthTraversalTree(root) {
             }
         }
     }
-    // console.log(dfsNodes);
     return yield* dfsNodes;
 }
 
@@ -371,13 +367,11 @@ function* depthTraversalTree(root) {
 
 function* breadthTraversalTree(root) {
     //throw new Error('Not implemented');
-    var visitedBfs = [];
-    var bfsNodeQueue = [];
-    var visitedMap = new Map();
+    var visitedBfs = [], bfsNodeQueue = [],visitedMap = new Map(),nodeTovisit ;
     bfsNodeQueue.push(root);
     visitedBfs.push({ n: root.n });
     while (bfsNodeQueue.length) {
-        var nodeTovisit = bfsNodeQueue.shift();
+        nodeTovisit = bfsNodeQueue.shift();
         visitedMap.delete(nodeTovisit.n);
         if (nodeTovisit.children) {
             for (let i = 0; i < nodeTovisit.children.length; i++) {
@@ -392,7 +386,6 @@ function* breadthTraversalTree(root) {
         }
 
     }
-    //console.log(visitedBfs);
     return yield* visitedBfs;
 }
 
@@ -411,48 +404,31 @@ function* breadthTraversalTree(root) {
  */
 var mergedArray;
 function* mergeSortedSequences(source1, source2) {
-    let s1 = source1();
-    let s2 = source2();
-    let a = s1.next();
-    let b = s2.next();
-    //console.log(a,b);
-    while(!a.done && !b.done){
-        if(a.value>b.value){
-            //console.log(b.value);
-            yield b.value;
-            b=s2.next();
+    let s1 = source1(),
+        s2 = source2(),
+        source1Itr = s1.next(),
+        source2Itr = s2.next();
+    while (!source1Itr.done && !source2Itr.done) {
+        if (source1Itr.value > source2Itr.value) {
+            yield source2Itr.value;
+            source2Itr = s2.next();
+        } else {
+            yield source1Itr.value;
+            source1Itr = s1.next();
         }
-        else{
-            //console.log(a.value);
-            yield a.value;
-            a=s1.next();
-        }
-        //console.log(a,b);
     }
-    if(a.done){
-       // console.log(a.value);
-       // yield a.value;
-        while(!b.done){
-           // console.log(b.value);
-            yield b.value;
-            b=s2.next();
+    if (source1Itr.done) {
+        while (!source2Itr.done) {
+            yield source2Itr.value;
+            source2Itr = s2.next();
         }
-        //console.log(b.value);
-        //yield b.value;
-    }
-    else if(b.done){
-        //console.log(b.value);
-        //yield b.value;
-        while(!a.done){
-            //console.log(a.value);
-            yield a.value;
-            a=s1.next();
+    } else if (source2Itr.done) {
+        while (!source1Itr.done) {
+            yield source1Itr.value;
+            source1Itr = s1.next();
         }
-        //console.log(a.value);
-        //yield a.value;
     }
 }
-
 module.exports = {
     get99BottlesOfBeer: get99BottlesOfBeer,
     getFibonacciSequence: getFibonacciSequence,

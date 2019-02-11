@@ -73,9 +73,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    var result = Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2);
-    return Math.sqrt(result);
-
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 }
 
 /**
@@ -113,10 +111,11 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-let dotProduct=x1*x2+y1*y2;
-let firstMod=Math.sqrt(Math.pow(x1,2)+Math.pow(y1,2));
-let secondMod=Math.sqrt(Math.pow(x2,2)+Math.pow(y2,2));
-return Math.acos(dotProduct/(firstMod*secondMod));
+    let dotProduct, firstMod, secondMod;
+    dotProduct = x1 * x2 + y1 * y2;
+    firstMod = Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2));
+    secondMod = Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2));
+    return Math.acos(dotProduct / (firstMod * secondMod));
 }
 
 /**
@@ -186,16 +185,15 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-let powOfTen=Math.pow(10,pow);
-let mod=num%powOfTen;
-let result;
-if(mod>powOfTen/2){
-result=num+powOfTen-mod;
-}
-else{
-    result=num-mod;
-}
-return result;
+    let powOfTen = Math.pow(10, pow),
+        mod = num % powOfTen,
+        result;
+    if (mod > powOfTen / 2) {
+        result = num + powOfTen - mod;
+    } else {
+        result = num - mod;
+    }
+    return result;
 }
 
 /**
@@ -216,13 +214,15 @@ return result;
  *   17 => true
  */
 function isPrime(n) {
-    var sqrtOfN = Math.sqrt(n);
+    var sqrtOfN = Math.sqrt(n),
+        result = true;
     for (let i = 2; i <= sqrtOfN; i++) {
         if (n % i == 0) {
-            return false;
+            result = false;
+            break;
         }
     }
-    return true;
+    return result;
 }
 
 /**
@@ -241,14 +241,14 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    //console.log("value",Number(value));
-    if(Number.isNaN(Number(value))){
-        return def;
+    let result;
+    if (Number.isNaN(Number(value))) {
+        result = def;
+    } else {
+        result = Number(value);
     }
-    else{
-        return Number(value);
-    }
-  }
+    return result;
+}
 
 module.exports = {
     getRectangleArea: getRectangleArea,

@@ -66,8 +66,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    let fullname = value.slice(value.indexOf(' ') + 1, value.indexOf('!'));
-    return fullname;
+    return value.slice(value.indexOf(' ') + 1, value.indexOf('!'));
 }
 
 /**
@@ -127,8 +126,8 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    return str.replace(value,'');
- }
+    return str.replace(value, '');
+}
 
 /**
  * Remove the first and last angle brackets from tag string
@@ -197,9 +196,9 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    var rectangle = createTopPart(width) + createMiddlePart(width, height) + createBottomPart(width);
-    return rectangle;
+    return createTopPart(width) + createMiddlePart(width, height) + createBottomPart(width);
 }
+
 function createTopPart(width) {
     var top = '\u250c';
     for (let i = 0; i < width - 2; i++) {
@@ -208,10 +207,12 @@ function createTopPart(width) {
     top = top + '\u2510' + '\n';
     return top;
 }
+
 function createMiddlePart(width, height) {
-    var middlePart = '';
+    var middlePart = '',
+        tempMiddlePart;
     for (let j = 0; j < height - 2; j++) {
-        var tempMiddlePart = '\u2502';
+        tempMiddlePart = '\u2502';
         for (let i = 0; i < width - 2; i++) {
             tempMiddlePart = tempMiddlePart + ' ';
         }
@@ -221,6 +222,7 @@ function createMiddlePart(width, height) {
     return middlePart;
 
 }
+
 function createBottomPart(width) {
     var bottom = '\u2514';
     for (let i = 0; i < width - 2; i++) {
@@ -252,27 +254,24 @@ function encodeToRot13(str) {
     }
     return encodedStr;
 }
+
 function encodeCharToRot13(charToEncode) {
-    var charAsciiCode = charToEncode.charCodeAt(0);
-    var encodedChar;
+    var charAsciiCode = charToEncode.charCodeAt(0),
+        encodedChar;
     if (charAsciiCode > 96 && charAsciiCode < 123) {
         if (charAsciiCode + 13 > 122) {
             encodedChar = String.fromCharCode((charAsciiCode + 13) % 122 + 96);
-        }
-        else {
+        } else {
             encodedChar = String.fromCharCode(charAsciiCode + 13);
         }
-    }
-    else if (charAsciiCode > 64 && charAsciiCode < 91) {
+    } else if (charAsciiCode > 64 && charAsciiCode < 91) {
         if (charAsciiCode + 13 > 90) {
             encodedChar = String.fromCharCode((charAsciiCode + 13) % 90 + 64);
-        }
-        else {
+        } else {
             encodedChar = String.fromCharCode(charAsciiCode + 13);
         }
 
-    }
-    else {
+    } else {
         encodedChar = charToEncode;
     }
     return encodedChar;
@@ -291,10 +290,7 @@ function encodeCharToRot13(charToEncode) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    if (typeof value === 'string' || value instanceof String) {
-        return true;
-    }
-    return false;
+    return typeof value === 'string' || value instanceof String;
 }
 
 /**
@@ -322,23 +318,31 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    var id;
-    var dict1={'♣':0,'♦':1,'♥':2,'♠':3};
-    var dict2={'A':0,'Q':11,'J':10,'K':12};
-    var charAtZero=value.charAt(0);
-    var charAtOne=value.charAt(1);
-    var asciiValueOfZero='0'.charCodeAt(0);
-    if(charAtOne==='0' && charAtZero==='1'){
-        var charAtThree=value.charAt(2);
-        id=9+dict1[charAtThree]*13;
-    }
-    else if(dict2[charAtZero]===undefined){
-        id=charAtZero.charCodeAt(0)-asciiValueOfZero-1;
-        id=id+dict1[charAtOne]*13
-    }
-    else{
-        id=dict2[charAtZero];
-        id=id+dict1[charAtOne]*13;
+    var id, dict1 = {
+            '♣': 0,
+            '♦': 1,
+            '♥': 2,
+            '♠': 3
+        },
+        dict2 = {
+            'A': 0,
+            'Q': 11,
+            'J': 10,
+            'K': 12
+        },
+        charAtZero = value.charAt(0),
+        charAtOne = value.charAt(1),
+        asciiValueOfZero = '0'.charCodeAt(0),
+        charAtThree;
+    if (charAtOne === '0' && charAtZero === '1') {
+        charAtThree = value.charAt(2);
+        id = 9 + dict1[charAtThree] * 13;
+    } else if (dict2[charAtZero] === undefined) {
+        id = charAtZero.charCodeAt(0) - asciiValueOfZero - 1;
+        id = id + dict1[charAtOne] * 13
+    } else {
+        id = dict2[charAtZero];
+        id = id + dict1[charAtOne] * 13;
     }
     return id;
 }

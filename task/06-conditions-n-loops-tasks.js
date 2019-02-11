@@ -32,14 +32,11 @@ function getFizzBuzz(num) {
     let result;
     if (num % 3 == 0 && num % 5 == 0) {
         result = "FizzBuzz";
-    }
-    else if (num % 3 == 0) {
+    } else if (num % 3 == 0) {
         result = "Fizz";
-    }
-    else if (num % 5 == 0) {
+    } else if (num % 5 == 0) {
         result = "Buzz";
-    }
-    else {
+    } else {
         result = num;
     }
     return result;
@@ -140,13 +137,15 @@ function isTriangle(a, b, c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    let downRect1 = rect1.top + rect1.height;
-    let rightRect1 = rect1.left + rect1.width;
-
+    let downRect1 = rect1.top + rect1.height,
+        rightRect1 = rect1.left + rect1.width,
+        result;
     if (downRect1 >= rect2.top && rightRect1 >= rect2.left) {
-        return true;
+        result = true;
+    } else {
+        result = false;
     }
-    else return false;
+    return result;
 }
 
 /**
@@ -177,11 +176,7 @@ function doRectanglesOverlap(rect1, rect2) {
  */
 function isInsideCircle(circle, point) {
     let distanceFromCenter = Math.sqrt(Math.pow(circle.center.x - point.x, 2) + Math.pow(circle.center.y - point.y, 2));
-    let result = false;
-    if (circle.radius > distanceFromCenter) {
-        result = true;
-    }
-    return result;
+    return circle.radius > distanceFromCenter;
 }
 
 /**
@@ -196,19 +191,19 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    let charMap = new Map();
+    let charMap = new Map(),
+        c, val, found;
     for (let i = 0; i < str.length; i++) {
-        let c = str.charAt(i);
+        c = str.charAt(i);
         if (charMap.has(c)) {
-            let val = charMap.get(c);
+            val = charMap.get(c);
             charMap.delete(c);
             charMap.set(c, val + 1);
-        }
-        else {
+        } else {
             charMap.set(c, 1);
         }
     }
-    let found = null;
+    found = null;
     for (var pair of charMap) {
         if (charMap.get(pair[0]) === 1) {
             found = pair[0];
@@ -243,20 +238,17 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
     let result;
     if (isStartIncluded) {
         result = "[";
-    }
-    else {
+    } else {
         result = "(";
     }
     if (a > b) {
         result = result + b + ", " + a;
-    }
-    else {
+    } else {
         result = result + a + ", " + b;
     }
     if (isEndIncluded) {
         result = result + "]";
-    }
-    else {
+    } else {
         result = result + ")";
     }
     return result;
@@ -328,31 +320,28 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    let ccnArray = ccn.toString().split("").reverse();
+    let ccnArray = ccn.toString().split("").reverse(),
+        sum;
     ccnArray.map(function (val, index) {
-        //console.log("index ",index);
         ccnArray[index] = parseInt(val);
         if (index % 2 == 1) {
             ccnArray[index] = sumOfTwoDigits(2 * ccnArray[index]);
         }
     });
-    let sum = 0;
-    //console.log(ccnArray);
+    sum = 0;
     ccnArray.map(function (val) {
         sum = sum + val;
     });
     return sum % 10 === 0;
 }
-function sumOfTwoDigits(num) {
 
+function sumOfTwoDigits(num) {
     let result;
     if (num % 10 === num) {
         result = num;
-    }
-    else {
+    } else {
         result = num % 10 + Math.floor(num / 10);
     }
-    // console.log(num+" to "+result);
     return result;
 }
 
@@ -377,6 +366,7 @@ function getDigitalRoot(num) {
     }
     return num;
 }
+
 function calculateSumOfDigits(n) {
     let sum = 0;
     while (n > 0) {
@@ -407,13 +397,14 @@ function calculateSumOfDigits(n) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    let stackArray = [], result = false;
+    let stackArray = [],
+        result = false,
+        top;
     for (let i = 0; i < str.length; i++) {
-        let top = stackArray[stackArray.length - 1];
+        top = stackArray[stackArray.length - 1];
         if (opposite(top, str[i])) {
             stackArray.pop();
-        }
-        else {
+        } else {
             stackArray.push(str[i]);
         }
     }
@@ -427,14 +418,11 @@ function opposite(symbol1, symbol2) {
     let result = false;
     if (symbol1 === '<' && symbol2 === '>') {
         result = true;
-    }
-    else if (symbol1 === '[' && symbol2 === ']') {
+    } else if (symbol1 === '[' && symbol2 === ']') {
         result = true;
-    }
-    else if (symbol1 === '{' && symbol2 === '}') {
+    } else if (symbol1 === '{' && symbol2 === '}') {
         result = true;
-    }
-    else if (symbol1 === '(' && symbol2 === ')') {
+    } else if (symbol1 === '(' && symbol2 === ')') {
         result = true;
     }
     return result;
@@ -472,24 +460,48 @@ function opposite(symbol1, symbol2) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    let date = endDate-startDate;
-    let sec = 1000;
-    let min = 60*sec;
-    let hour = 60*min;
-    let day = 24*hour;
-    let month = 30*day;
-    let year = 12*month;
-    if (date<=45*sec) return 'a few seconds ago'
-    if(date>45*sec &&date<=90*sec) return 'a minute ago'
-    if(date>90*sec && date<=45*min) return Math.round((date-0.001)/min)+' minutes ago'
-    if(date>45*min && date<=90*min) return 'an hour ago'
-    if(date>90*min && date<=22*hour) return Math.round((date-0.001)/hour)+' hours ago'
-    if(date>22*hour && date<=36*hour) return 'a day ago'
-    if(date>36*hour && date<=25*day) return Math.round((date-0.001)/day)+' days ago'
-    if(date>25*day && date<=45*day) return 'a month ago'
-    if(date>45*day && date<=345*day)return Math.round((date-0.001)/month)+' months ago'
-    if(date>345*day && date<=545*day) return 'a year ago'
-    if(date>545*day) return Math.round((date-0.001)/year)+' years ago'
+    let date = endDate - startDate,
+        sec = 1000,
+        min = 60 * sec,
+        hour = 60 * min,
+        day = 24 * hour,
+        month = 30 * day,
+        year = 12 * month,
+        result;
+    if (date <= 45 * sec) {
+        result = 'a few seconds ago'
+    }
+    if (date > 45 * sec && date <= 90 * sec) {
+        result = 'a minute ago'
+    }
+    if (date > 90 * sec && date <= 45 * min) {
+        result = Math.round((date - 0.001) / min) + ' minutes ago'
+    }
+    if (date > 45 * min && date <= 90 * min) {
+        result = 'an hour ago';
+    }
+    if (date > 90 * min && date <= 22 * hour) {
+        result = Math.round((date - 0.001) / hour) + ' hours ago'
+    }
+    if (date > 22 * hour && date <= 36 * hour) {
+        result = 'a day ago'
+    }
+    if (date > 36 * hour && date <= 25 * day) {
+        result = Math.round((date - 0.001) / day) + ' days ago';
+    }
+    if (date > 25 * day && date <= 45 * day) {
+        result = 'a month ago';
+    }
+    if (date > 45 * day && date <= 345 * day) {
+        result = Math.round((date - 0.001) / month) + ' months ago';
+    }
+    if (date > 345 * day && date <= 545 * day) {
+        result = 'a year ago';
+    }
+    if (date > 545 * day) {
+        result = Math.round((date - 0.001) / year) + ' years ago';
+    }
+    return result;
 }
 
 /**
@@ -533,13 +545,13 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
+    throw new Error("Not implemented");
     let result = "";
 
     function wordComplainer(a, b) {
         if (a == b && a != "") {
             result = result + "/" + a;
-        }
-        else return false
+        } else return false
     }
 
     for (let i = pathes.length; i > 1; i--) {
@@ -557,16 +569,13 @@ function getCommonDirectoryPath(pathes) {
 
     return result + "/";
 }
+
 function commonPathBetween(commonpath, path2) {
-    let newCommonPath = [];
-    let pathWithSmallerLength = commonpath.length > path2.length ? path2 : commonpath;
+    let newCommonPath = [],pathWithSmallerLength = commonpath.length > path2.length ? path2 : commonpath;
     for (let j = 0; j < pathWithSmallerLength.length; j++) {
         if (commonpath[j] === path2[j]) {
-            //console.log(commonpath[j]);
             newCommonPath.push(commonpath[j]);
-        }
-        else {
-            // console.log(commonpath[j]);
+        } else {
             break;
         }
     }
@@ -592,13 +601,15 @@ function commonPathBetween(commonpath, path2) {
  *
  */
 function getMatrixProduct(a, b) {
-    var aNumRows = a.length, aNumCols = a[0].length,
-        bNumRows = b.length, bNumCols = b[0].length,
-        m = new Array(aNumRows);  // initialize array of rows
+    var aNumRows = a.length,
+        aNumCols = a[0].length,
+        bNumRows = b.length,
+        bNumCols = b[0].length,
+        m = new Array(aNumRows); // initialize array of rows
     for (var r = 0; r < aNumRows; ++r) {
         m[r] = new Array(bNumCols); // initialize the current row
         for (var c = 0; c < bNumCols; ++c) {
-            m[r][c] = 0;             // initialize the current cell
+            m[r][c] = 0; // initialize the current cell
             for (var i = 0; i < aNumCols; ++i) {
                 m[r][c] += a[r][i] * b[i][c];
             }

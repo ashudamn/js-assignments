@@ -54,19 +54,19 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   var year = date.getFullYear();
-   var leapYearstatus = false;
+   var year = date.getFullYear(),
+      leapYearstatus;
    if (year % 4 == 0) {
       if (year % 400 == 0) {
          leapYearstatus = true;
-      }
-      else if (year % 100 == 0) {
+      } else if (year % 100 == 0) {
          leapYearstatus = false;
-      }
-      else {
+      } else {
          leapYearstatus = true;
       }
 
+   } else {
+      leapYearstatus = false;
    }
    return leapYearstatus;
 }
@@ -99,12 +99,15 @@ function timeSpanToString(startDate, endDate) {
    sss < 10 ? sss = '00' + sss : sss;
    return hh + ':' + mm + ':' + ss + '.' + sss;
 }
+
 function calculateHours(milliseconds) {
    return Math.floor(milliseconds / (60 * 60 * 1000));
 }
+
 function calculateMinutes(milliseconds) {
    return Math.floor(milliseconds / (60 * 1000));
 }
+
 function calculateSeconds(milliseconds) {
    console.log(milliseconds);
    return Math.floor(milliseconds / 1000);
@@ -123,14 +126,18 @@ function calculateSeconds(milliseconds) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-   let hours = date.getUTCHours();
-   (hours >= 12) ? hours = hours - 12 : hours;
-   let min = date.getUTCMinutes();
-   let ang = Math.abs(0.5 * ((60 * hours) - (11 * min)));
+   let hours = date.getUTCHours(),
+      min, ang, result;
+   (hours >= 12) ? hours = hours - 12: hours;
+   min = date.getUTCMinutes();
+   ang = Math.abs(0.5 * ((60 * hours) - (11 * min)));
    if (ang > 180) {
-      return (Math.PI * (360 - ang)) / 180;
+      result = (Math.PI * (360 - ang)) / 180;
+   } else {
+      result = ((Math.PI * ang) / 180);
    }
-   return ((Math.PI * ang) / 180);
+
+   return result;
 }
 
 module.exports = {
