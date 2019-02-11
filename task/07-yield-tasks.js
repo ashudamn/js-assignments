@@ -268,21 +268,21 @@ function* getFibonacciSequence() {
         
     }
     return yield* fibonacciArray;*/
-    let prev1 = 0, prev2 = 0, sum,i = 0;
+    let prev1 = 0,
+        prev2 = 0,
+        sum, i = 0;
     while (true) {
         if (i == 0) {
             prev1 = 0;
             prev2 = 0;
             sum = prev1 + prev2;
             yield sum;
-        }
-        else if (i == 1) {
+        } else if (i == 1) {
             prev1 = 0;
             prev2 = 1;
             sum = prev1 + prev2;
             yield sum;
-        }
-        else {
+        } else {
             sum = prev1 + prev2;
             prev1 = prev2;
             prev2 = sum;
@@ -324,13 +324,18 @@ function* getFibonacciSequence() {
  */
 
 function* depthTraversalTree(root) {
-    var visitedMap = new Map(), dfsStack = [], dfsNodes = [],nodeToVisit;
+    var visitedMap = new Map(),
+        dfsStack = [],
+        dfsNodes = [],
+        nodeToVisit;
     dfsStack.push(root);
     while (dfsStack.length != 0) {
         nodeToVisit = dfsStack.pop();
         if (!visitedMap.has(nodeToVisit.n)) {
             visitedMap.set(nodeToVisit.n, true);
-            dfsNodes.push({ n: nodeToVisit.n });
+            dfsNodes.push({
+                n: nodeToVisit.n
+            });
         }
         if (nodeToVisit.children) {
             for (let i = nodeToVisit.children.length - 1; i >= 0; i--) {
@@ -367,9 +372,14 @@ function* depthTraversalTree(root) {
 
 function* breadthTraversalTree(root) {
     //throw new Error('Not implemented');
-    var visitedBfs = [], bfsNodeQueue = [],visitedMap = new Map(),nodeTovisit ;
+    var visitedBfs = [],
+        bfsNodeQueue = [],
+        visitedMap = new Map(),
+        nodeTovisit;
     bfsNodeQueue.push(root);
-    visitedBfs.push({ n: root.n });
+    visitedBfs.push({
+        n: root.n
+    });
     while (bfsNodeQueue.length) {
         nodeTovisit = bfsNodeQueue.shift();
         visitedMap.delete(nodeTovisit.n);
@@ -377,7 +387,9 @@ function* breadthTraversalTree(root) {
             for (let i = 0; i < nodeTovisit.children.length; i++) {
                 if (!visitedMap.has(nodeTovisit.children[i].n)) {
                     //console.log('pushing '+nodeTovisit.children[i].n);
-                    visitedBfs.push({ n: nodeTovisit.children[i].n });
+                    visitedBfs.push({
+                        n: nodeTovisit.children[i].n
+                    });
                     bfsNodeQueue.push(nodeTovisit.children[i]);
                     visitedMap.set(nodeTovisit.children[i].n, true);
 
@@ -403,6 +415,7 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 var mergedArray;
+
 function* mergeSortedSequences(source1, source2) {
     let s1 = source1(),
         s2 = source2(),

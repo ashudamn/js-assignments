@@ -66,11 +66,10 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
-    let result,args = Array.prototype.slice.call(arguments);
+    let result, args = Array.prototype.slice.call(arguments);
     if (args.length === 0) {
         result = null;
-    }
-    else {
+    } else {
         result = function (x) {
             let y = 0;
             for (let i = 0; i < args.length; i++) {
@@ -104,8 +103,7 @@ function memoize(func) {
             var res = new cacheObject(func);
             cacheData.push(res);
             return res.result;
-        }
-        else {
+        } else {
             return found.result;
         }
     }
@@ -137,8 +135,7 @@ function retry(func, attempts) {
             try {
                 r = func();
                 break;
-            }
-            catch (err) {
+            } catch (err) {
                 continue;
             }
         }
@@ -172,7 +169,7 @@ function retry(func, attempts) {
  */
 function logger(func, logFunc) {
     return function () {
-        let arg,start,result;
+        let arg, start, result;
         arg = (JSON.stringify(Array.from(arguments))).slice(1, -1);
         start = `${func.name}(${arg})`;
         logFunc(`${start} starts`);
@@ -199,7 +196,8 @@ function partialUsingArguments(fn) {
     let argsOuter = Array.prototype.slice.call(arguments);
     argsOuter = argsOuter.slice(1);
     let result = function () {
-        let argsInner = Array.prototype.slice.call(arguments),innerResult = argsOuter.concat(argsInner);
+        let argsInner = Array.prototype.slice.call(arguments),
+            innerResult = argsOuter.concat(argsInner);
         return innerResult.join('');
     }
     return result;

@@ -571,7 +571,8 @@ function getCommonDirectoryPath(pathes) {
 }
 
 function commonPathBetween(commonpath, path2) {
-    let newCommonPath = [],pathWithSmallerLength = commonpath.length > path2.length ? path2 : commonpath;
+    let newCommonPath = [],
+        pathWithSmallerLength = commonpath.length > path2.length ? path2 : commonpath;
     for (let j = 0; j < pathWithSmallerLength.length; j++) {
         if (commonpath[j] === path2[j]) {
             newCommonPath.push(commonpath[j]);
